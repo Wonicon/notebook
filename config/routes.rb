@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   root 'welcome#index'
 
   # Creating a new entry is bound to subjects, so the overview page should not allow creating new entries.
