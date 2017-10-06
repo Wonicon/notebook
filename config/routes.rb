@@ -1,3 +1,21 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'welcome#index'
+
+  # Creating a new entry is bound to subjects, so the overview page should not allow creating new entries.
+
+  resources :posts, only: [:index, :show, :edit]
+
+  resources :journals, only: [:index, :show, :edit]
+
+  resources :tasks, only: [:index, :show, :edit]
+
+  resources :subjects do
+    resources :posts
+    resources :journals
+    resources :tasks do
+      resources :task_items
+    end
+  end
+
+  resources :categories
 end
