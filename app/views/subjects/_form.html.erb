@@ -1,0 +1,20 @@
+<%= form_with(model: @subject) do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :category %>
+    <%= select_tag :category, options_from_collection_for_select(@categories, :id, :name) %>
+  </p>
+  <p>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.label :cover %>
+    <%= form.file_field :cover, accept: 'image/*', id: 'cover' %>
+    <img id='preview' src='#' >
+  </p>
+  <%= form.submit %>
+<% end %>

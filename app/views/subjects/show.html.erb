@@ -1,0 +1,13 @@
+<img id='cover' src='<%= @subject.cover %>' >
+
+<h1><%= @subject.name %></h1>
+
+<p>分类：<%= link_to @subject.category.name, category_path(@subject.category) %></p>
+
+<p><%= @subject.description %></p>
+
+<p>Posts (<%= @subject.posts.count %>)</p>
+<p>Tasks (<%= @subject.tasks.count %>)</p>
+<p>Journals (<%= @subject.journals.count %>)</p>
+
+<p><%= link_to 'back', subjects_path %></p>
