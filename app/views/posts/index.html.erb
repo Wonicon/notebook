@@ -1,0 +1,10 @@
+<h1>
+  Posts
+  <% if @subject %>
+    of <%= link_to @subject.name, subject_path(@subject) %>
+  <% end %>
+</h1>
+
+<ul>
+  <%= render @posts %>
+</ul>
