@@ -11,7 +11,7 @@
   </p>
   <p>
     <%= form.label :due_date %>
-    <%= form.date_field :due_date, min: Date.today %>
+    <%= form.date_field :due_date, min: Date.today, value: Date.today %>
   </p>
   <p>
     <label>Sub tasks list:</label>
@@ -20,11 +20,11 @@
   </p>
   <p>
     <%= form.label :new_sub_task %>
-    <%= text_field_tag :new_task_item, '' %>
+    <%= form.text_field :new_task_item, id: 'new_task_item' %>
     <button id='task_item_btn' type='button'>Add</button>
   </p>
   <p>
     <%= form.hidden_field :items, id: 'task_items', value: '[]' %>
-    <%= form.submit %>
+    <%= form.submit id: 'submit' %>
   </p>
 <% end %>
