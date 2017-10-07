@@ -14,7 +14,7 @@ class SubjectsController < ApplicationController
     name = params[:subject][:name]
     cover = params[:subject][:cover]
     ext = cover.content_type.split('/').last
-    filename = File.join('media', "#{name}_cover.#{ext}")
+    filename = File.join('media', "#{SecureRandom.urlsafe_base64}.#{ext}")
     filepath = File.join(Rails.public_path, filename)
     params[:subject][:cover] = File.join('/', filename)
     @subject = Subject.new(subject_params)

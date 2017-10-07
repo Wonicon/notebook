@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       redirect_to subject_post_path(@subject, @post)
     end
   end
-  
+
   def show
     @post = Post.find(params[:id])
     @subject = @post.subject
