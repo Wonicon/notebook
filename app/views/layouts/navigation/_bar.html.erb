@@ -1,0 +1,11 @@
+<div id='nav-bar'>
+  <%= render partial: 'layouts/navigation/item',
+    collection: [['Index', root_path],
+                 ['Categories', categories_path],
+                 ['Subjects', subjects_path],
+                 ['Posts', posts_path],
+                 ['Journals', journals_path],
+                 ['Tasks', tasks_path]],
+    as: :entity,
+    spacer_template: 'layouts/navigation/ruler' %>
+</div>
