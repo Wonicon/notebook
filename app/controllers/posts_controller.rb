@@ -16,8 +16,7 @@ class PostsController < ApplicationController
 
   def create
     @subject = Subject.find(params[:subject_id])
-    @post = Post.new(post_params)
-    @post.subject = @subject
+    @post = @subject.posts.new(post_params)
     if @post.save
       redirect_to post_path(@post)
     end
