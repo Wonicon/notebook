@@ -11,11 +11,11 @@ class SubjectsController < ApplicationController
   end
 
   def create
+    name = params[:subject][:name]
     cover = params[:subject][:cover]
     ext = cover.content_type.split('/').last
-    filename = File.join('media', "#{SecureRandom.urlsafe_base64}.#{ext}")
+    filename = File.join('media', "#{name}_cover.#{ext}")
     filepath = File.join(Rails.public_path, filename)
-    puts "save cover to #{filepath}"
     params[:subject][:cover] = File.join('/', filename)
     @subject = Subject.new(subject_params)
     @subject.category = Category.find_by(id: params[:category])

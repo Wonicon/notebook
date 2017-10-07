@@ -6,8 +6,19 @@
 
 <p><%= @subject.description %></p>
 
-<p>Posts (<%= @subject.posts.count %>)</p>
-<p>Tasks (<%= @subject.tasks.count %>)</p>
-<p>Journals (<%= @subject.journals.count %>)</p>
+<p>
+  <%= link_to "Posts (#{@subject.posts.count})", subject_posts_path(@subject) %>
+  <%= link_to 'add', new_subject_post_path(@subject) %>
+</p>
+
+<p>
+  <%= link_to "Tasks (#{@subject.tasks.count})", subject_tasks_path(@subject) %>
+  <%= link_to 'add', new_subject_task_path(@subject) %>
+</p>
+
+<p>
+  <%= link_to "Journals (#{@subject.journals.count})", subject_journals_path(@subject) %>
+  <%= link_to 'add', new_subject_journal_path(@subject) %>
+</p>
 
 <p><%= link_to 'back', subjects_path %></p>
