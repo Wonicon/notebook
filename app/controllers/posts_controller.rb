@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.subject = @subject
     if @post.save
-      redirect_to subject_post_path(@subject, @post)
+      redirect_to post_path(@post)
     end
   end
 
