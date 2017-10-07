@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-document.addEventListener 'turbolinks:load', ->
+if document.URL.match('.*/categories/new')
+  document.addEventListener 'turbolinks:load', ->
   document.body.addEventListener 'ajax:success', (event) ->
     item_wrapper = document.createElement 'div'
     item_wrapper.innerHTML = event.detail[0]['rendered']
