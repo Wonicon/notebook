@@ -14,7 +14,6 @@ registerTaskItemListHandler = ->
   json_builder = JSON.parse '[]'
 
   task_item_btn.onclick = ->
-    console.log 'hello'
     item = new_task_item.value
     if !item
       alert 'New sub task cannot be empty'

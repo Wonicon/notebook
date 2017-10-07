@@ -10,13 +10,10 @@ class CategoriesController < ApplicationController
     @category = Category.new(params.require(:category).permit(:name))
     @result = @category.save
       if @result
-        render json: {
-          rendered: render_to_string(
-            partial: 'categories/category',
-            formats: :html,
-            layout: false,
-            locals: { category: @category }
-          )}
+        render json: render_to_string(
+          partial: 'categories/category',
+          formats: :html, layout: false,
+          locals: { category: @category })
       else
         report_error(@category)
       end
