@@ -1,7 +1,3 @@
 <li>
-  <% if local_assigns[:subject] %>
-    <%= link_to post.title, subject_post_path(local_assigns[:subject], post) %>
-  <% else %>
-    <%= link_to post.title, subject_post_path(post.subject, post) %>
-  <% end %>
+  <%= link_to post.title, post_path(post) %>
 </li>
