@@ -1,3 +1,5 @@
+require_relative 'common.rb'
+
 class PostsController < ApplicationController
   def index
     subject_id = params[:subject_id]
@@ -19,6 +21,8 @@ class PostsController < ApplicationController
     @post = @subject.posts.new(post_params)
     if @post.save
       redirect_to post_path(@post)
+    else
+      report_error(@post)
     end
   end
 

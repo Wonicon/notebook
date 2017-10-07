@@ -1,3 +1,5 @@
+require_relative 'common.rb'
+
 class CategoriesController < ApplicationController
   def index
     @categories = Category.all
@@ -7,24 +9,17 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(params.require(:category).permit(:name))
     @result = @category.save
-    respond_to do |format|
       if @result
-        format.json do
-          render json: {
-            rendered: render_to_string(
-              partial: 'categories/category',
-              formats: :html,
-              layout: false,
-              locals: { category: @category }
-            )}
-        end
+        render json: {
+          rendered: render_to_string(
+            partial: 'categories/category',
+            formats: :html,
+            layout: false,
+            locals: { category: @category }
+          )}
       else
-        format.json { render json: {
-          reason: @category.errors,
-          name: params[:category][:name]
-        }, status: :unprocessable_entity }
+        report_error(@category)
       end
-    end
   end
 
   def show
