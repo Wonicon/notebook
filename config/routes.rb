@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 
   resources :journals, only: [:index, :show, :edit]
 
-  resources :tasks, only: [:index, :show, :edit] do
-    resources :task_items
+  resources :tasks, except: [:new, :create] do
+    resources :task_items, only: [:create, :update, :delete]
+    resources :task_comments, only: [:create, :update, :delete]
   end
 
   resources :subjects do
