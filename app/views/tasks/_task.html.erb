@@ -1,6 +1,6 @@
 <li>
   <%= link_to task.title, task_path(task) %>: <%= "(due #{task.due_date})" if task.due_date %>
   <ul>
-    <%= render partial: 'tasks/task_item', collection: task.task_items %>
+    <%= render task.task_items %>
   </ul>
 </li>
