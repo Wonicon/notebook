@@ -24,17 +24,8 @@ class TasksController < ApplicationController
     @task = @subject.tasks.new(task_params)
 
     if @task.save
-      task_items = params[:task][:items]
-      if !task_items.empty?
-        JSON.parse(task_items).each do |item_content|
-          task_item = @task.task_items.new(content: item_content)
-          if !task_item.save
-            report_error(task_item)
-            break
-          end
-        end
-        redirect_to task_path(@task)
-      end
+      insert_task_items(@task)
+      redirect_to task_path(@task)
     else
       report_error(@task)
     end
@@ -48,4 +39,18 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :content)
   end
+
+  private
+  def insert_task_items(task)
+    task_items = params[:task][:items]
+    return if task_items.empty?  # No data
+    JSON.parse(task_items).each do |item_content|
+      task_item = task.task_items.new(content: item_content)
+      if !task_item.save
+        report_error(task_item)
+        break
+      end
+    end
+  end
+
 end

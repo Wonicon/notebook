@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-if document.URL.match '.*/subjects/new'
-  document.addEventListener 'turbolinks:load', ->
+document.addEventListener 'turbolinks:load', ->
+  if document.URL.match '.*/subjects/new'
     cover = document.getElementById 'cover'
     cover.addEventListener 'change', updatePreview
 
