@@ -1,5 +1,5 @@
 <h1>类别：<%= @category.name %></h1>
 
-<%= render @subjects %>
+<%= render partial: 'subjects/subject', collection: @subjects %>
 
 <%= link_to 'back', categories_path %>
