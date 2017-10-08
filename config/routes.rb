@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # Creating a new entry is bound to subjects, so the overview page should not allow creating new entries.
 
-  resources :posts, only: [:index, :show, :edit]
+  resources :posts, except: [:new, :create]
 
   resources :journals, only: [:index, :show, :edit]
 
