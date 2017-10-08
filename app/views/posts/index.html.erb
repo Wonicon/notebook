@@ -5,6 +5,10 @@
   <% end %>
 </h1>
 
+<% if @subject %>
+  <%= link_to 'new post', new_subject_post_path(@subject) %>
+<% end %>
+
 <ul>
   <%= render @posts %>
 </ul>

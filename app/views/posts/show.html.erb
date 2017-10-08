@@ -1,7 +1,12 @@
+
 <h1><%= @post.title %></h1>
 
 <article>
   <%= @post.content %>
 </article>
 
-<%= link_to 'back', subject_posts_path(@subject) %>
+<p>
+  <%= link_to "posts", subject_posts_path(@subject) %> of <%= link_to @subject.name, subject_path(@subject) %>
+  |
+  <%= link_to 'delete', post_path(@post), method: :delete %>
+</p>

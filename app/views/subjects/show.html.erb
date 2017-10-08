@@ -2,7 +2,7 @@
 
 <h1><%= @subject.name %></h1>
 
-<p>分类：<%= link_to @subject.category.name, category_path(@subject.category) %></p>
+<p>Category: <%= link_to @subject.category.name, category_path(@subject.category) %></p>
 
 <p><%= @subject.description %></p>
 
