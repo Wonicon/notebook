@@ -1,4 +1,5 @@
 require 'json'
+require_relative 'common.rb'
 
 class TasksController < ApplicationController
   def index
@@ -17,29 +18,25 @@ class TasksController < ApplicationController
 
   def create
     @subject = Subject.find(params[:subject_id])
-    submit_params = params[:task]
-    due_date = submit_params[:due_date]
-    task_items = submit_params[:items]
+    due_date = params[:task][:due_date]
+    params[:task][:due_date] = !due_date.empty? ? Date.parse(due_date) : nil
 
-    @task = Task.new(task_params)
-    @task.subject = @subject
-    @task.due_date = Date.parse(due_date) if !due_date.empty?
+    @task = @subject.tasks.new(task_params)
+
     if @task.save
+      task_items = params[:task][:items]
       if !task_items.empty?
-        task_items = JSON.parse(task_items)
-        task_items.each do |item_content|
-          task_item = TaskItem.new
-          task_item.content = item_content
-          task_item.task = @task
+        JSON.parse(task_items).each do |item_content|
+          task_item = @task.task_items.new(content: item_content)
           if !task_item.save
-            render js: "alert(#{@task.errors.message})"
+            report_error(task_item)
             break
           end
         end
-        redirect_to subject_tasks_path(@subject)
+        redirect_to task_path(@task)
       end
     else
-      render js: "alert(#{@task.errors.message})"
+      report_error(@task)
     end
   end
 
