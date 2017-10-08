@@ -1,0 +1,20 @@
+<h1>
+  Journals
+  <% if @subject %>
+    of <%= link_to @subject.name, subject_path(@subject) %>
+  <% end %>
+</h1>
+
+<% if @subject %>
+  <div id='new_journal'>
+    <%= render 'form' %>
+  </div>
+<% end %>
+
+<div id='journals' class='list'>
+  <% if @subject %>
+    <%= render @journals %>
+  <% else %>
+    <%= render 'global' %>
+  <% end %>
+</div>

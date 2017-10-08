@@ -1,0 +1,21 @@
+<%= form_with(model: [@subject, @subject.journals.build]) do |form| %>
+  <table>
+    <tr>
+      <td>
+        <%= form.label :date %>
+      </td>
+      <td>
+        <%= form.date_field :date, value: Date.today %><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= form.label :content %>
+      </td>
+      <td>
+        <%= form.text_area :content %>
+      </td>
+    </tr>
+  </table>
+  <%= form.submit %>
+<% end %>

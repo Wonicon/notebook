@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :posts, except: [:new, :create]
 
-  resources :journals, only: [:index, :show, :edit]
+  resources :journals, except: [:new, :create]
 
   resources :tasks, except: [:new, :create] do
     resources :task_items, only: [:create, :update, :delete]
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :subjects do
     resources :posts, only: [:index, :new, :create]
-    resources :journals, only: [:index, :new, :create]
+    resources :journals, only: [:index, :create]
     resources :tasks, only: [:index, :new, :create]
   end
 
