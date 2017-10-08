@@ -1,3 +1,4 @@
 <li>
   <%= link_to "#{category.name} (#{category.subjects.count})", category_path(category) %>
+  <%= link_to "✖", category_path(category), method: :delete %>
 </li>
