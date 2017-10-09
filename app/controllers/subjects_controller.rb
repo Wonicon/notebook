@@ -1,4 +1,5 @@
 require 'securerandom'
+require 'data_uri'
 
 class SubjectsController < ApplicationController
   def index
@@ -13,10 +14,11 @@ class SubjectsController < ApplicationController
   def create
     name = params[:subject][:name]
 
-    cover = params[:subject][:cover]
+    cover = params[:subject][:cropped_cover]
     if cover != nil
-      ext = File.extname(cover.content_type)
-      url_path = File.join('/media', "#{SecureRandom.urlsafe_base64}#{ext}")
+      uri = URI::Data.new(cover)
+      ext = uri.content_type.split('/').last
+      url_path = File.join('/media', "#{SecureRandom.urlsafe_base64}.#{ext}")
       host_path = File.join(Rails.public_path, url_path)
       params[:subject][:cover] = url_path
     else
@@ -27,7 +29,7 @@ class SubjectsController < ApplicationController
     @subject.category = Category.find_by(id: params[:category])
 
     if @subject.save
-      File.open(host_path, 'wb') { |f| f.write(cover.tempfile.read) } if cover
+      File.open(host_path, 'wb') { |f| f.write(uri.data) } if cover
       redirect_to subject_path(@subject)
     else
       puts @subject.errors.full_messages

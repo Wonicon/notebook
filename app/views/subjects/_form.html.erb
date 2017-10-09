@@ -13,8 +13,14 @@
   </p>
   <p>
     <%= form.label :cover %>
+    <div id='img-preview'></div>
     <%= form.file_field :cover, accept: 'image/*', id: 'cover' %>
-    <img id='preview' src='#' >
+    <%= form.hidden_field :cropped_cover, id: 'cropped_cover' %>
+  </p>
+  <p>
+    <div id='cropper-container'>
+      <img id='cropper-area' src='#'>
+    </div>
   </p>
   <%= form.submit %>
 <% end %>
