@@ -35,6 +35,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
+  def edit
+    @task = Task.find(params[:id])
+  end
+
   def destroy
     task = Task.find(params[:id])
     subject = task.subject
@@ -47,7 +51,6 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :content)
   end
 
-  private
   def insert_task_items(task)
     task_items = params[:task][:items]
     return if task_items.empty?  # No data

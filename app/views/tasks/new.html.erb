@@ -1,30 +1,3 @@
 <h1>New task for <%= @subject.name %></h1>
 
-<%= form_with(model: [@subject, @subject.tasks.build], id: 'new_task') do |form| %>
-  <p>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </p>
-  <p>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </p>
-  <p>
-    <%= form.label :due_date %>
-    <%= form.date_field :due_date, min: Date.today, value: Date.today %>
-  </p>
-  <p>
-    <label>Sub tasks list:</label>
-    <ol id='task_item_list'>
-    </ol>
-  </p>
-  <p>
-    <%= form.label :new_sub_task %>
-    <%= form.text_field :new_task_item, id: 'new_task_item' %>
-    <button id='task_item_btn' type='button'>Add</button>
-  </p>
-  <p>
-    <%= form.hidden_field :items, id: 'task_items', value: '[]' %>
-    <%= form.submit id: 'submit' %>
-  </p>
-<% end %>
+<%= render 'form', model: [@subject, @subject.tasks.build], id: 'new_task' %>

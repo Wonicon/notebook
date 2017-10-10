@@ -1,0 +1,50 @@
+<%= form_with(model: model, id: id) do |form| %>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <%= form.label :title %>
+        </td>
+        <td>
+          <%= form.text_field :title %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= form.label :content %>
+        </td>
+        <td>
+          <%= form.text_area :content %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= form.label :due_date %>
+        </td>
+        <td>
+          <%= form.date_field :due_date, min: Date.today, value: Date.today %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= form.label :new_sub_task %>
+        </td>
+        <td>
+          <%= form.text_field :new_task_item, id: 'new_task_item' %>
+          <button id='task_item_btn' type='button'>Add</button>
+        </td>
+      </tr>
+      <tr>
+        <td class='increament_list_label_cell'>
+          <label>Sub tasks list:</label>
+        </td>
+        <td>
+          <ol id='task_item_list'>
+        </td>
+      </ol>
+      </tr>
+    </tbody>
+  </table>
+  <%= form.hidden_field :items, id: 'task_items', value: '[]' %>
+  <%= form.submit id: 'submit' %>
+<% end %>
