@@ -32,9 +32,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    redirect_back fallback_location: root_path
+    post = Post.find(params[:id])
+    subject = post.subject
+    post.destroy
+    redirect_back subject_posts(subject)
   end
 
   private

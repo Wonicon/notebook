@@ -1,7 +1,23 @@
-<h1>类别：<%= @category.name %></h1>
+<h1>
+  <% if @edit %>
+    <%= form_with(model: @category) do |f| %>
+      Category:
+      <%= f.text_field :name, value: @category.name %>
+      <%= f.submit %>
+    <% end %>
+  <% else %>
+    Category:
+    <%= @category.name %>
+  <% end %>
+</h1>
 
-<%= render partial: 'subjects/subject', collection: @subjects %>
+<div id='category-actions'>
+  <%= link_to 'New subject', new_subject_path %>
+  | <%= link_to 'Rename', edit_category_path(@category) %>
+  | <%= link_to 'All', categories_path %>
+  | <%= link_to 'Delete', category_path(@category), method: :delete %>
+</div>
 
-<%= link_to 'new subject', new_subject_path %>
-|
-<%= link_to 'back', categories_path %>
+<div id='subject-list'>
+  <%= render partial: 'subjects/subject', collection: @category.subjects %>
+</div>

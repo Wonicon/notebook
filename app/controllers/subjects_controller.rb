@@ -44,7 +44,7 @@ class SubjectsController < ApplicationController
   def destroy
     @subject = Subject.find(params[:id])
     @subject.destroy
-    redirect_back fallback_location: root_path
+    redirect_to subjects_path
   end
 
   private

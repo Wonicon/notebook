@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(params.require(:category).permit(:name))
+    @category = Category.new(category_params)
     @result = @category.save
       if @result
         render json: render_to_string(
@@ -21,12 +21,28 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @subjects = @category.subjects
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+    @edit = true
+    render 'show'
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    @category.update(category_params)
+    redirect_to @category
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
     redirect_to categories_path
+  end
+
+  private
+  def category_params
+    params.require(:category).permit(:name)
   end
 end

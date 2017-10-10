@@ -1,12 +1,12 @@
-
 <h1><%= @post.title %></h1>
+
+<p>
+  <%= link_to @subject.name, subject_path(@subject) %>
+  | <%= link_to 'Edit', edit_post_path(@post) %>
+  | <%= link_to 'Delete', post_path(@post), method: :delete %>
+</p>
+
 
 <article>
   <%= @post.content %>
 </article>
-
-<p>
-  <%= link_to "posts", subject_posts_path(@subject) %> of <%= link_to @subject.name, subject_path(@subject) %>
-  |
-  <%= link_to 'delete', post_path(@post), method: :delete %>
-</p>

@@ -1,13 +1,20 @@
 <h1><%= @task.title %></h1>
 
-<div>
-  <%= link_to 'back', subject_tasks_path(@task.subject) %> |
-  <%= link_to 'delete', task_path(@task), method: :delete %>
+<div id='taks-navigation'>
+  <%= link_to @task.subject.name, subject_path(@task.subject) %>
+  | <%= link_to 'Edit', edit_task_path(@task) %>
+  | <%= link_to 'Delete', task_path(@task), method: :delete %>
 </div>
 
-<ul id='task_items'>
+<div id='task-content '>
+  <p>
+    <%= @task.content %>
+  </p>
+</div>
+
+<ol id='task_items'>
   <%= render @task.task_items %>
-</ul>
+</ol>
 
 <div id='task_comments'>
   <%= render @task.task_comments %>
