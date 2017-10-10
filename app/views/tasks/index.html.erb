@@ -4,4 +4,8 @@
   <%= link_to 'new task', new_subject_task_path(@subject) %>
 <% end %>
 
-<%= render @tasks %>
+<table>
+  <tbody>
+    <%= render @tasks %>
+  </tbody>
+</table>

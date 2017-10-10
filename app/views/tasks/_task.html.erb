@@ -1,6 +1,16 @@
-<li>
-  <%= link_to task.title, task_path(task) %>: <%= "(due #{task.due_date})" if task.due_date %>
-  <ul>
-    <%= render task.task_items %>
-  </ul>
-</li>
+<tr>
+  <td>
+    <%= link_to task.title, task_path(task) %>
+  </td>
+  <td>
+    <%= task.task_items.count(:finished_at) %> / <%= task.task_items.count %>
+  </td>
+  <td>
+    <% if task.due_date %>
+      <% days_left = (task.due_date - Date.today).to_i %>
+      <%= "(#{pluralize(days_left, 'day')} left until #{task.due_date})" if task.due_date %>
+    <% else %>
+      no due date
+    <% end %>
+  </td>
+</tr>
