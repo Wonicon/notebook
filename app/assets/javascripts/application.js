@@ -12,5 +12,5 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require cropper.min
+//= require cropper
 //= require_tree .
