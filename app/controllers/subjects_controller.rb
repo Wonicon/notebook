@@ -13,9 +13,9 @@ class SubjectsController < ApplicationController
 
   def create
     name = params[:subject][:name]
-
     cover = params[:subject][:cropped_cover]
-    if cover != nil
+
+    if not cover.empty?
       uri = URI::Data.new(cover)
       ext = uri.content_type.split('/').last
       url_path = File.join('/media', "#{SecureRandom.urlsafe_base64}.#{ext}")
@@ -26,10 +26,10 @@ class SubjectsController < ApplicationController
     end
 
     @subject = Subject.new(subject_params)
-    @subject.category = Category.find_by(id: params[:category])
+    @subject.category = Category.find(params[:category])
 
     if @subject.save
-      File.open(host_path, 'wb') { |f| f.write(uri.data) } if cover
+      File.open(host_path, 'wb') { |f| f.write(uri.data) } if not cover.empty?
       redirect_to subject_path(@subject)
     else
       puts @subject.errors.full_messages
