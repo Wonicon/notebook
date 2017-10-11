@@ -1,5 +1,18 @@
+require_relative 'common.rb'
+
 class TaskItemsController < ApplicationController
   before_action :set_task_item, only: [:update, :delete]
+
+  def create
+    task = Task.find(params[:task_id])
+    task_item = task.task_items.new(
+      params.require(:task_item).permit(:content))
+    if task_item.save
+      redirect_to task
+    else
+      report_error(task_item);
+    end
+  end
 
   def update
     puts params[:finished]
@@ -11,7 +24,6 @@ class TaskItemsController < ApplicationController
     end
     redirect_to @task_item.task
   end
-
 
   private
   def set_task_item
