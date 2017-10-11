@@ -23,8 +23,10 @@ updatePreview = ->
 
   cropper = new Cropper cropper_area, {
     dragMode: 'none'
-    viewMode: 3
+    viewMode: 2
     aspectRatio: 1
+    zoomable: false
+    responsive: false  # Avoid unexpected zooming when resizing
     preview: '#img-preview'
   }
 

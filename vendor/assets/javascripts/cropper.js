@@ -1150,6 +1150,7 @@ var render = {
       this.renderCropBox();
     }
   },
+
   initContainer: function initContainer() {
     var element = this.element,
         options = this.options,
@@ -1160,10 +1161,13 @@ var render = {
     addClass(cropper, CLASS_HIDDEN);
     removeClass(element, CLASS_HIDDEN);
 
+    var imageData = this.imageData;
     var containerData = {
-      width: Math.max(container.offsetWidth, Number(options.minContainerWidth) || 200),
-      height: Math.max(container.offsetHeight, Number(options.minContainerHeight) || 100)
+      width: Math.min(imageData.naturalWidth,
+                 Math.max(container.offsetWidth, Number(options.minContainerWidth) || 200)),
     };
+    containerData.height = containerData.width * (imageData.naturalHeight / imageData.naturalWidth);
+
 
     this.containerData = containerData;
 
@@ -1221,6 +1225,7 @@ var render = {
     this.initialImageData = extend({}, imageData);
     this.initialCanvasData = extend({}, canvasData);
   },
+
   limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
     var options = this.options,
         containerData = this.containerData,
