@@ -1,7 +1,33 @@
 require 'securerandom'
 require 'data_uri'
 
+
+class Cover
+  attr_reader :url
+
+  def initialize(data_url)
+    @data_url = data_url
+    if data_url and not data_url.empty?
+      @uri = URI::Data.new(data_url)
+      ext = @uri.content_type.split('/').last
+      @url = File.join('/media', "#{SecureRandom.urlsafe_base64}.#{ext}")
+      @filename = File.join(Rails.public_path, url)
+    else
+      @url = nil
+    end
+  end
+
+  def save
+    if @data_url and not @data_url.empty?
+      File.open(@filename, 'wb') { |f| f.write(@uri.data) }
+    end
+  end
+end
+
+
 class SubjectsController < ApplicationController
+  before_action :set_subject, only: [:show, :edit, :destroy, :update]
+
   def index
     @subjects = Subject.all
   end
@@ -13,43 +39,54 @@ class SubjectsController < ApplicationController
 
   def create
     name = params[:subject][:name]
-    cover = params[:subject][:cropped_cover]
+    cover = Cover.new(params[:subject][:cropped_cover])
+    params[:subject][:cover] = cover.url if cover.url
 
-    if not cover.empty?
-      uri = URI::Data.new(cover)
-      ext = uri.content_type.split('/').last
-      url_path = File.join('/media', "#{SecureRandom.urlsafe_base64}.#{ext}")
-      host_path = File.join(Rails.public_path, url_path)
-      params[:subject][:cover] = url_path
-    else
-      params[:subject][:cover] = nil
-    end
-
-    @subject = Subject.new(subject_params)
-    @subject.category = Category.find(params[:category])
+    @subject = Category.find(params[:category])
+                       .subjects
+                       .new(subject_params)
 
     if @subject.save
-      File.open(host_path, 'wb') { |f| f.write(uri.data) } if not cover.empty?
+      cover.save
       redirect_to subject_path(@subject)
     else
       puts @subject.errors.full_messages
     end
-
   end
 
   def show
-    @subject = Subject.find(params[:id])
+  end
+
+  def edit
+    @categories = Category.all
+    render 'new'
+  end
+
+  def update
+    cover = Cover.new(params[:subject][:cropped_cover])
+    params[:subject][:cover] = cover.url if cover.url
+    if @subject.update(subject_params)
+      cover.save
+    end
+    category = Category.find(params[:category])
+    if category != @subject.category
+      @subject.update(category: category)
+    end
+    redirect_to @subject
   end
 
   def destroy
-    @subject = Subject.find(params[:id])
     @subject.destroy
     redirect_to subjects_path
   end
 
   private
   def subject_params
-    puts params
     params.require(:subject).permit(:name, :description, :cover)
+  end
+
+  private
+  def set_subject
+    @subject = Subject.find(params[:id])
   end
 end

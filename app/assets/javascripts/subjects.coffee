@@ -5,7 +5,7 @@
 cropper = null
 
 document.addEventListener 'turbolinks:load', ->
-  if document.URL.match '.*/subjects/new'
+  if document.URL.match '.*/subjects/(new|\\d+/edit)'
     cover = document.getElementById 'cover'
     cover.addEventListener 'change', updatePreview
 
