@@ -5,6 +5,8 @@
 document.addEventListener 'turbolinks:load', ->
   if document.URL.match '.*/tasks/new'
     registerTaskItemListHandler()
+  if document.URL.match '.*/tasks/\\d+'
+    registerTaskItemCheckHandler()
 
 registerTaskItemListHandler = ->
   task_item_list = document.getElementById 'task_item_list'
@@ -24,3 +26,14 @@ registerTaskItemListHandler = ->
       task_item_list.appendChild li
       new_task_item.value = ''
       task_items.value = JSON.stringify json_builder
+
+registerTaskItemCheckHandler = ->
+  task_items = document.getElementsByClassName 'task_item'
+  for task_item in task_items
+    task_item.addEventListener 'change', (e) ->
+      console.log this.checked
+      Rails.ajax({
+        type: 'PUT'
+        url: document.URL + '/task_items/' + this.value
+        data: 'finished=' + this.checked
+      })
