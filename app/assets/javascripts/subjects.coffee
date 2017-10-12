@@ -8,6 +8,8 @@ document.addEventListener 'turbolinks:load', ->
   if document.URL.match '.*/subjects/(new|\\d+/edit)'
     cover = document.getElementById 'cover'
     cover.addEventListener 'change', updatePreview
+    # Category dropdown selection initialization require by Semantic UI
+    $('.ui.dropdown').dropdown()
 
 updatePreview = ->
   cover = document.getElementById 'cover'
