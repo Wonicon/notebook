@@ -16,12 +16,12 @@
   <div class='field'>
     <%= form.label :cover %>
     <div id='img-preview'></div>
-    <label for="cover" class="ui icon button"><i class="file icon"></i>Open File</label>
+    <label for="cover" class="inverted red ui button"><i class="file icon"></i>Open File</label>
     <%= form.file_field :cover, accept: 'image/*', id: 'cover' %>
     <%= form.hidden_field :cropped_cover, id: 'cropped_cover' %>
     <img id='cropper-area' src='#'>
   </div>
   <div class='field'>
-    <%= form.submit nil, class: 'ui button' %>
+    <%= form.submit nil, class: 'ui button red' %>
   </div>
 <% end %>
