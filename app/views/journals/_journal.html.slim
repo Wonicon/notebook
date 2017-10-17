@@ -1,4 +1,8 @@
-h2
-  = journal.date
-p
-  = journal.content
+.comment
+  .content
+    .metadata#subject_show_journal_date
+      span.date = journal.date
+    .text = journal.content
+    .actions
+      .right-aligned
+        = link_to 'delete', journal_path(journal), method: :delete, class: 'replay'

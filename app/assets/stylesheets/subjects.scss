@@ -42,3 +42,11 @@
 #subject_show_header {
   margin-top: 1em;
 }
+
+#subject_show_journal_date {
+  margin-left: 0px;  // Override semantic-ui
+}
+
+#subject_show_comments {
+  max-width: 100%;  // Override semantic-ui
+}
