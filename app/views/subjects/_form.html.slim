@@ -1,0 +1,22 @@
+= form_with(model: @subject, class: 'ui form') do |form|
+  .fields
+    .ten.wide.field
+      = form.label :name
+      = form.text_field :name
+    .six.wide.field
+      = form.label :category
+      = select_tag :category, options_from_collection_for_select(@categories, :id, :name), class: 'ui search dropdown'
+  .field
+    = form.label :description
+    = form.text_area :description
+  .field
+    = form.label :cover
+    #img-preview
+    label.inverted.red.ui.button[for="cover"]
+      i.file.icon
+      | Open File
+    = form.file_field :cover, accept: 'image/*', id: 'cover'
+    = form.hidden_field :cropped_cover, id: 'cropped_cover'
+    img#cropper-area[src="#"]
+  .field
+    = form.submit nil, class: 'ui button red'

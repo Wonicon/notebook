@@ -1,0 +1,10 @@
+h1
+  | Tasks 
+  - if @subject
+    | of 
+    = link_to @subject.name, subject_path(@subject)
+- if @subject
+  = link_to 'new task', new_subject_task_path(@subject)
+table
+  tbody
+    = render @tasks

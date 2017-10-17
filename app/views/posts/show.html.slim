@@ -1,0 +1,10 @@
+h1
+  = @post.title
+p
+  = link_to @subject.name, subject_path(@subject)
+  |  | 
+  = link_to 'Edit', edit_post_path(@post)
+  |  | 
+  = link_to 'Delete', post_path(@post), method: :delete
+article
+  = @post.content

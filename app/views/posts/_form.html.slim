@@ -1,0 +1,9 @@
+= form_with(model: [@subject, @subject.posts.build]) do |form|
+  p
+    = form.label :title
+    = form.text_field :title
+  p
+    = form.label :content
+    = form.text_area :content
+  p
+    = form.submit

@@ -1,0 +1,12 @@
+.item
+  .content
+    .ui.checkbox
+      |  <input type='checkbox' class='task_item' value="
+      = task_item.id
+      | " 
+      = 'checked' if task_item.finished_at
+      | > 
+      label
+        = task_item.content
+        - if task_item.finished_at
+          |  (finished!) 

@@ -1,8 +1,0 @@
-<% @journals.each do |date, journals| %>
-  <h2 id='<%= date %>'><%= date %></h2>
-  <% journals.sort_by{ |j| j.subject.name }.each do |j| %>
-    <h3><%= j.subject.name %></h3>
-    <p><%= j.content %></p>
-    <%= link_to 'delete', journal_path(j), method: :delete %>
-  <% end %>
-<% end %>
