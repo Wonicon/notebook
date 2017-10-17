@@ -1,7 +1,13 @@
-<li>
-  <input type='checkbox' class='task_item' value="<%= task_item.id %>" <%= 'checked' if task_item.finished_at %>>
-  <%= task_item.content %>
-  <% if task_item.finished_at %>
-    (finished!)
-  <% end %>
-</li>
+<div class='item'>
+  <div class='content'>
+    <div class='ui checkbox'>
+      <input type='checkbox' class='task_item' value="<%= task_item.id %>" <%= 'checked' if task_item.finished_at %>>
+      <label>
+        <%= task_item.content %>
+        <% if task_item.finished_at %>
+          (finished!)
+        <% end %>
+      </label>
+    </div>
+  </div>
+</div>

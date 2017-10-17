@@ -12,9 +12,9 @@
   </p>
 </div>
 
-<ol id='task_items'>
+<div id='task_items' class="ui">
   <%= render @task.task_items %>
-</ol>
+</div>
 
 <%= form_with(model: [@task, @task.task_items.build]) do |f| %>
   <%= f.label :new_sub_task %>:
