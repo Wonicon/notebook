@@ -1,0 +1,4 @@
+h1
+  | New task for 
+  = @subject.name
+= render 'form', model: [@subject, @subject.tasks.build], id: 'new_task'

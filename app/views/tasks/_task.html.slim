@@ -1,0 +1,13 @@
+tr
+  td
+    = link_to task.title, task_path(task)
+  td
+    = task.task_items.count(:finished_at)
+    |  / 
+    = task.task_items.count
+  td
+    - if task.due_date
+      - days_left = (task.due_date - Date.today).to_i
+      = "(#{pluralize(days_left, 'day')} left until #{task.due_date})" if task.due_date
+    - else
+      |  no due date 

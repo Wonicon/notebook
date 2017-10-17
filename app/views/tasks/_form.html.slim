@@ -1,0 +1,34 @@
+= form_with(model: model, id: id) do |form|
+  table
+    tbody
+      tr
+        td
+          = form.label :title
+        td
+          = form.text_field :title
+      tr
+        td
+          = form.label :content
+        td
+          = form.text_area :content
+      tr
+        td
+          = form.label :due_date
+        td
+          = form.date_field :due_date, min: Date.today, value: Date.today
+      tr
+        td
+          = form.label :new_sub_task
+        td
+          = form.text_field :new_task_item, id: 'new_task_item'
+          button#task_item_btn[type="button"]
+            | Add
+      tr
+        td.increament_list_label_cell
+          label
+            | Sub tasks list:
+        td
+          ol#task_item_list
+
+  = form.hidden_field :items, id: 'task_items', value: '[]'
+  = form.submit id: 'submit'
