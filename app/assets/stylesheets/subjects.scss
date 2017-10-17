@@ -23,3 +23,22 @@
 #show-cover {
   width: 100%;
 }
+
+.right-aligned {
+  width: 100%;
+  display: table;
+  text-align: right;
+}
+
+// Journals are not long.
+// Therefore the default height of semantic-ui (12em)
+// seems too large for them.
+// 'auto' will let the element use the min-height (8em)
+// given by semantic-ui, which is much more proper.
+#new_journal_input_field {
+  height: auto;
+}
+
+#subject_show_header {
+  margin-top: 1em;
+}
