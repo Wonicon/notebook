@@ -1,0 +1,9 @@
+h1
+  |  Posts 
+  - if @subject
+    |  of 
+    = link_to @subject.name, subject_path(@subject)
+- if @subject
+  = link_to 'new post', new_subject_post_path(@subject)
+ul
+  = render @posts
