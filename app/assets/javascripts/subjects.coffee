@@ -12,7 +12,10 @@ document.addEventListener 'turbolinks:load', ->
     $('.ui.dropdown').dropdown()
 
   # Init tabs in show page
-  $('.tabular.menu .item').tab()
+  $('.tabular.menu .item').tab({
+    history: true,
+    historyType: 'hashTag'
+  })
 
 updatePreview = ->
   cover = document.getElementById 'cover'

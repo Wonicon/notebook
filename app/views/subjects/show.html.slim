@@ -17,24 +17,24 @@
 p = @subject.description
 
 .ui.top.attached.tabular.menu
-  a.item.active[data-tab="posts"]
+  a.item[data-tab="posts" class="#{'active' if @current_subject_page_tab == 'posts'}"]
     | Posts
-  a.item[data-tab="tasks"]
+  a.item[data-tab="tasks" class="#{'active' if @current_subject_page_tab == 'tasks'}"]
     | Tasks
-  a.item[data-tab="journals"]
+  a.item[data-tab="journals" class="#{'active' if @current_subject_page_tab == 'journals'}"]
     | Journals
 
-.ui.bottom.attached.tab.segment.active[data-tab="posts"]
+.ui.bottom.attached.tab.segment[data-tab="posts" class="#{'active' if @current_subject_page_tab == 'posts'}"]
   = link_to 'new post', new_subject_post_path(@subject)
   br
   = render partial: 'posts/post', collection: @subject.posts
 
-.ui.bottom.attached.tab.segment[data-tab="tasks"]
+.ui.bottom.attached.tab.segment[data-tab="tasks" class="#{'active' if @current_subject_page_tab == 'tasks'}"]
   = link_to 'new task', new_subject_task_path(@subject)
   table
     = render partial: 'tasks/task', collection: @subject.tasks
 
-.ui.bottom.attached.tab.segment[data-tab="journals"]
+.ui.bottom.attached.tab.segment[data-tab="journals" class="#{'active' if @current_subject_page_tab == 'journals'}"]
   #new_journal
     = render 'journals/form'
   .ui.comments#subject_show_comments

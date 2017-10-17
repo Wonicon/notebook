@@ -18,6 +18,7 @@ class JournalsController < ApplicationController
   def create
     subject = Subject.find(params[:subject_id])
     journal = subject.journals.new(journal_params)
+    session[:current_subject_page_tab] = 'journals'
     if journal.save
       redirect_back fallback_location: root_path
     else
@@ -28,6 +29,7 @@ class JournalsController < ApplicationController
   def destroy
     journal = Journal.find(params[:id])
     journal.destroy
+    session[:current_subject_page_tab] = 'journals'
     redirect_back fallback_location: root_path
   end
 
