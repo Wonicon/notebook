@@ -1,16 +1,20 @@
-<img id='cover' src='<%= @subject.cover %>' >
+<div class='ui grid'>
+  <div class='four wide column'>
+    <img id='show-cover' src='<%= @subject.cover %>' alt='cover'>
+  </div>
+  <div class='twelve wide column'>
+    <h1><%= @subject.name %></h1>
+    <p>Category: <%= link_to @subject.category.name, category_path(@subject.category) %></p>
 
-<h1><%= @subject.name %></h1>
-
-<p>Category: <%= link_to @subject.category.name, category_path(@subject.category) %></p>
+    <div id='action'>
+      <%= link_to 'Edit', edit_subject_path(@subject) %>
+      |
+      <%= link_to 'Delete', subject_path(@subject), method: :delete, confirm: 'Are you sure?' %>
+    </div>
+  </div>
+</div>
 
 <p><%= @subject.description %></p>
-
-<div id='action'>
-  <%= link_to 'Edit', edit_subject_path(@subject) %>
-  |
-  <%= link_to 'Delete', subject_path(@subject), method: :delete, confirm: 'Are you sure?' %>
-</div>
 
 <p>
   <%= link_to "Posts (#{@subject.posts.count})", subject_posts_path(@subject) %>
