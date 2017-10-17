@@ -11,6 +11,9 @@ document.addEventListener 'turbolinks:load', ->
     # Category dropdown selection initialization require by Semantic UI
     $('.ui.dropdown').dropdown()
 
+  # Init tabs in show page
+  $('.tabular.menu .item').tab()
+
 updatePreview = ->
   cover = document.getElementById 'cover'
   cropper_area = document.getElementById 'cropper-area'
