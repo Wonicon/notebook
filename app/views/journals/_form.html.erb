@@ -1,9 +1,0 @@
-<%= form_with(model: [@subject, @subject.journals.build], class: 'ui form') do |form| %>
-  <%= form.hidden_field :date, value: Date.today %>
-  <div class='field'>
-    <%= form.text_area :content, id: 'new_journal_input_field' %>
-  </div>
-  <div class='right-aligned'>
-    <%= form.submit nil, class: 'ui button inverted blue right align' %>
-  </div>
-<% end %>
