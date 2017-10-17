@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     subject = post.subject
     post.destroy
-    redirect_back subject_posts(subject)
+    redirect_back subject_path(subject)
   end
 
   private
