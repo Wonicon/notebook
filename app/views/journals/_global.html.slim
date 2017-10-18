@@ -1,7 +1,14 @@
 - @journals.each do |date, journals|
-  h2[id="#{date}"]
-    = date
-  - journals.sort_by{ |j| j.subject.name }.each do |j|
-    h3 = j.subject.name
-    p = j.content
-    = link_to 'delete', journal_path(j), method: :delete
+  .ui.segment
+    .ui.comments
+      .ui.dividing.header
+        h2[id="#{date}"] = date
+      - journals.sort_by{ |j| j.subject.name }.each do |j|
+        .comment.hover-trigger
+          a.avatar
+            img[src="#{j.subject.cover}"]
+          .content
+            a.author[href="#{subject_path(j.subject)}"] = j.subject.name
+            .text = markdown j.content
+            #hover-mask.actions
+              = link_to 'delete', journal_path(j), method: :delete, class: 'reply'

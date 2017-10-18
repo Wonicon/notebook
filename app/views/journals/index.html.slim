@@ -1,13 +1,4 @@
-h1
-  |  Journals 
-  - if @subject
-    |  of 
-    = link_to @subject.name, subject_path(@subject)
-- if @subject
-  #new_journal
-    = render 'form'
+h1 Journals
+
 #journals.list
-  - if @subject
-    = render @journals
-  - else
-    = render 'global'
+  = render 'global'
