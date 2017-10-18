@@ -1,4 +1,4 @@
-<div id='nav-bar'>
+<div id='nav-bar' class='ui secondary menu'>
   <%= render partial: 'layouts/navigation/item',
     collection: [['Index', root_path],
                  ['Categories', categories_path],
@@ -6,6 +6,14 @@
                  ['Posts', posts_path],
                  ['Journals', journals_path],
                  ['Tasks', tasks_path]],
-    as: :entity,
-    spacer_template: 'layouts/navigation/ruler' %>
+    as: :entity %>
+
+  <div class='right menu'>
+    <div class='item'>
+      <div class='ui icon input'>
+        <input type='text', placeholder='Search...'>
+        <i class='search link icon'></i>
+      </div>
+    </div>
+  </div>
 </div>
