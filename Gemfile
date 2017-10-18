@@ -56,3 +56,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'data_uri'
 
 gem 'slim-rails'
+
+gem 'kramdown'
