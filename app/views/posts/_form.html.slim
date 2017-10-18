@@ -1,9 +1,9 @@
-= form_with(model: [@subject, @subject.posts.build]) do |form|
-  p
+= form_with(model: [@subject, @post], class: 'ui form') do |form|
+  .field
     = form.label :title
     = form.text_field :title
-  p
+  .field
     = form.label :content
     = form.text_area :content
-  p
-    = form.submit
+  .field
+    = form.submit nil, class: 'ui red button'

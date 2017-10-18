@@ -31,11 +31,22 @@ class PostsController < ApplicationController
     @subject = @post.subject
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    render 'edit'
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to @post
+  end
+
   def destroy
     post = Post.find(params[:id])
     subject = post.subject
     post.destroy
-    redirect_back subject_path(subject)
+    redirect_to subject_path(subject)
   end
 
   private
