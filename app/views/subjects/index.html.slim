@@ -1,6 +1,6 @@
 h1 Subjects
 
-= link_to 'New Subject', new_subject_path
-
-#subjects
+.ui.list#subjects
   = render @subjects
+
+= link_to 'New Subject', new_subject_path, class: 'ui small red button'

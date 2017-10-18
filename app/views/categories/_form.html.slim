@@ -1,4 +1,4 @@
-= form_with(model: @category, format: :json) do |form|
-  = form.label :name
-  = form.text_field :name
-  = form.submit
+= form_with(model: @category, format: :json, class: 'ui form') do |form|
+  .ui.small.action.input
+    = form.text_field :name, placeholder: 'Category'
+    button.ui.red.button Add
