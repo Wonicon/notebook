@@ -36,8 +36,12 @@ updatePreview = ->
     cropper.destroy()
     URL.revokeObjectURL(cropper_area.src)  # Release covered resourcexx
 
+  preview = document.getElementById('img-preview')
+  origin = document.getElementById('origin-preview')
   if cover.files[0]
     cropper_area.src = URL.createObjectURL(cover.files[0])
+    origin.style = 'display:none'  # hide original one
+    preview.classList.add('cover-preview')  # give original size before hooked
     cropper = new Cropper cropper_area, {
       dragMode: 'none'
       viewMode: 2
@@ -47,7 +51,10 @@ updatePreview = ->
       preview: '#img-preview'
     }
   else  # When cancel the file chooser
-    cropper.destroy()
-    cropper = null
     URL.revokeObjectURL(cropper_area.src)  # Release covered resourcexx
     cropper_area.src = '#'
+    origin.style = ''  # display origin
+    preview.classList.remove('cover-preview')  # hide area (1)
+    preview.style = ''  # remove styles set by cropper to hide area (2)
+    cropper.destroy()
+    cropper = null
