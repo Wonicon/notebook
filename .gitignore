@@ -22,7 +22,5 @@
 
 .byebug_history
 
-/public/media/*
 /public/uploads/*
-!/public/media/.keep
 !/public/uploads/.keep
