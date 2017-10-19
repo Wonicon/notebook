@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008090018) do
+ActiveRecord::Schema.define(version: 20171019150805) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "name"
+    t.string "file"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,6 +33,14 @@ ActiveRecord::Schema.define(version: 20171008090018) do
     t.datetime "updated_at", null: false
     t.date "date"
     t.index ["subject_id"], name: "index_journals_on_subject_id"
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.string "name"
+    t.string "file"
+    t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
