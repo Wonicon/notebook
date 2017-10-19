@@ -1,28 +1,6 @@
+require_relative 'common.rb'
 require 'securerandom'
 require 'data_uri'
-
-
-class Cover
-  attr_reader :url
-
-  def initialize(data_url)
-    @data_url = data_url
-    if data_url and not data_url.empty?
-      @uri = URI::Data.new(data_url)
-      ext = @uri.content_type.split('/').last
-      @url = File.join('/media', "#{SecureRandom.urlsafe_base64}.#{ext}")
-      @filename = File.join(Rails.public_path, url)
-    else
-      @url = nil
-    end
-  end
-
-  def save
-    if @data_url and not @data_url.empty?
-      File.open(@filename, 'wb') { |f| f.write(@uri.data) }
-    end
-  end
-end
 
 
 class SubjectsController < ApplicationController
@@ -39,19 +17,15 @@ class SubjectsController < ApplicationController
   end
 
   def create
-    name = params[:subject][:name]
-    cover = Cover.new(params[:subject][:cropped_cover])
-    params[:subject][:cover] = cover.url if cover.url
-
-    @subject = Category.find(params[:category])
+    subject = Category.find(params[:category])
                        .subjects
                        .new(subject_params)
-
-    if @subject.save
-      cover.save
-      redirect_to subject_path(@subject)
+    subject.cover = params[:subject][:cover]
+    subject.cover.crop(params[:subject])
+    if subject.save
+      redirect_to subject
     else
-      puts @subject.errors.full_messages
+      report_error(subject)
     end
   end
 
@@ -66,11 +40,13 @@ class SubjectsController < ApplicationController
   end
 
   def update
-    cover = Cover.new(params[:subject][:cropped_cover])
-    params[:subject][:cover] = cover.url if cover.url
-    if @subject.update(subject_params)
-      cover.save
+    if params[:subject][:cover]
+      @subject.cover = params[:subject][:cover]
+      @subject.cover.crop(params[:subject])
     end
+    @subject.update(subject_params)
+    puts @subject.cover
+    puts @subject.cover.path
     category = Category.find(params[:category])
     if category != @subject.category
       @subject.update(category: category)
@@ -84,11 +60,11 @@ class SubjectsController < ApplicationController
   end
 
   private
+
   def subject_params
-    params.require(:subject).permit(:name, :description, :cover)
+    params.require(:subject).permit(:name, :description)
   end
 
-  private
   def set_subject
     @subject = Subject.find(params[:id])
   end
