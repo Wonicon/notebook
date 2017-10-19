@@ -7,4 +7,6 @@ class Subject < ApplicationRecord
   validates :name, presence: true
   validates :category, presence: true
   validates_uniqueness_of :name, scope: :category
+
+  mount_uploader :cover, ImageUploader
 end

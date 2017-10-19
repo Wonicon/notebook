@@ -4,7 +4,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -44,10 +44,22 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  def base64
+    @base64 ||= "#{SecureRandom.urlsafe_base64}"
+  end
+
   def filename
     if original_filename
-      ext = File.extname(original_filename)
-      "#{SecureRandom.urlsafe_base64}#{ext}"
+      "#{base64}_#{original_filename}"
+    else
+      "#{base64}#{file.extname}"
+    end
+  end
+
+  def crop(params)
+    manipulate! do |img|
+      img.crop "#{params[:width]}x#{params[:height]}+#{params[:left]}+#{params[:top]}"
+      img
     end
   end
 

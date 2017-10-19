@@ -6,17 +6,28 @@
     .six.wide.field
       = form.label :category
       = select_tag :category, options_from_collection_for_select(@categories, :id, :name), class: 'ui search dropdown'
+
   .field
     = form.label :description
     = form.text_area :description
+
   .field
     = form.label :cover
+
     #img-preview
+
     label.inverted.red.ui.button[for="cover"]
       i.file.icon
       | Open File
+
     = form.file_field :cover, accept: 'image/*', id: 'cover'
-    = form.hidden_field :cropped_cover, id: 'cropped_cover'
+
+    = form.hidden_field :width, id: 'crop_width'
+    = form.hidden_field :height, id: 'crop_height'
+    = form.hidden_field :left, id: 'crop_left'
+    = form.hidden_field :top, id: 'crop_top'
+
     img#cropper-area[src="#"]
+
   .field
     = form.submit nil, class: 'ui button red'

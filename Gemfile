@@ -60,3 +60,5 @@ gem 'slim-rails'
 gem 'kramdown'
 
 gem 'carrierwave'
+
+gem "mini_magick"
