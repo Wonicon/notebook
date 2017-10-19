@@ -58,3 +58,5 @@ gem 'data_uri'
 gem 'slim-rails'
 
 gem 'kramdown'
+
+gem 'carrierwave'
