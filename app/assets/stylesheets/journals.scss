@@ -2,10 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#hover-mask {
+.hover-mask {
     visibility: hidden;
 }
 
-.hover-trigger:hover #hover-mask {
+.hover-trigger:hover .hover-mask {
     visibility: inherit;
 }

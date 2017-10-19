@@ -1,6 +1,8 @@
 require_relative 'common.rb'
 
 class JournalsController < ApplicationController
+  before_action :set_active, only: [:index]
+
   def index
     sid = params[:subject_id]
     if sid
@@ -36,5 +38,10 @@ class JournalsController < ApplicationController
   private
   def journal_params
     params.require(:journal).permit(:content, :date)
+  end
+
+  private
+  def set_active
+    session[:current_controller] = 'Journals'
   end
 end

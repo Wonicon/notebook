@@ -2,6 +2,8 @@ require 'json'
 require_relative 'common.rb'
 
 class TasksController < ApplicationController
+  before_action :set_active, only: [:index, :new, :show, :edit]
+
   def index
     subject_id = params[:subject_id]
     if subject_id
@@ -63,4 +65,8 @@ class TasksController < ApplicationController
     end
   end
 
+  private
+  def set_active
+    session[:current_controller] = 'Tasks'
+  end
 end

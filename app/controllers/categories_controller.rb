@@ -1,6 +1,8 @@
 require_relative 'common.rb'
 
 class CategoriesController < ApplicationController
+  before_action :set_active, only: [:index, :new, :show, :edit]
+
   def index
     @categories = Category.all
     @category = Category.new
@@ -44,5 +46,9 @@ class CategoriesController < ApplicationController
   private
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def set_active
+    session[:current_controller] = 'Categories'
   end
 end

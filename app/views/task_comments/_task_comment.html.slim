@@ -1,2 +1,5 @@
-p.task_comment
-  = comment.content
+.ui.comment
+  .content
+    .metadata#date-leading
+      span.date = task_comment.created_at
+    .text = markdown task_comment.content

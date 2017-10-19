@@ -1,6 +1,8 @@
 require_relative 'common.rb'
 
 class PostsController < ApplicationController
+  before_action :set_active, only: [:index, :new, :show, :edit]
+
   def index
     subject_id = params[:subject_id]
     if subject_id
@@ -52,5 +54,9 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def set_active
+    session[:current_controller] = 'Posts'
   end
 end

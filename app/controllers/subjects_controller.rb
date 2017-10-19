@@ -27,6 +27,7 @@ end
 
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :destroy, :update]
+  before_action :set_active, only: [:index, :new, :show, :edit]
 
   def index
     @subjects = Subject.all
@@ -90,5 +91,9 @@ class SubjectsController < ApplicationController
   private
   def set_subject
     @subject = Subject.find(params[:id])
+  end
+
+  def set_active
+    session[:current_controller] = 'Subjects'
   end
 end

@@ -1,20 +1,30 @@
 h1
   = @task.title
+
 #taks-navigation
   = link_to @task.subject.name, subject_path(@task.subject)
-  |  | 
+  |  |
   = link_to 'Edit', edit_task_path(@task)
-  |  | 
+  |  |
   = link_to 'Delete', task_path(@task), method: :delete
-#task-content 
+
+#task-content
   p
     = @task.content
+
 #task_items.ui
   = render @task.task_items
 = form_with(model: [@task, @task.task_items.build]) do |f|
   = f.label :new_sub_task
-  | : 
+  | :
   = f.text_field :content
   = f.submit
-#task_comments
+
+#task_comments.ui.comments
   = render @task.task_comments
+
+= form_with(model: [@task, TaskComment.new], class: 'ui form') do |f|
+  .ui.field
+    = f.text_area :content
+  .ui.field
+    = f.submit nil, class: 'ui red button'
