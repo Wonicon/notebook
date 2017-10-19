@@ -9,18 +9,18 @@ h1
   = link_to 'Delete', task_path(@task), method: :delete
 
 #task-content
-  p
-    = @task.content
+  p = @task.content
 
-#task_items.ui
+.ui.list
   = render @task.task_items
-= form_with(model: [@task, @task.task_items.build]) do |f|
-  = f.label :new_sub_task
-  | :
-  = f.text_field :content
-  = f.submit
 
-#task_comments.ui.comments
+
+= form_with(model: [@task, @task.task_items.build], class: 'ui form') do |f|
+  .ui.mini.action.input
+    = f.text_field :content, placeholder: 'Sub task...'
+    button.ui.red.button Add
+
+.ui.comments
   = render @task.task_comments
 
 = form_with(model: [@task, TaskComment.new], class: 'ui form') do |f|
