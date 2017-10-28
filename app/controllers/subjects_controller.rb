@@ -31,7 +31,6 @@ class SubjectsController < ApplicationController
 
   def show
     @current_subject_page_tab = session[:current_subject_page_tab] || 'posts'
-    puts @current_subject_page_tab
   end
 
   def edit

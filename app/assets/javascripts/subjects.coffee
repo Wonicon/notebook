@@ -24,10 +24,7 @@ document.addEventListener 'turbolinks:load', ->
 
   if document.URL.match '.*/subjects/.*'
     # Init tabs in show page
-    $('.tabular.menu .item').tab({
-      history: true,
-      historyType: 'hashTag'
-    })
+    $('.tabular.menu .item').tab({})
 
 updatePreview = ->
   cropper_area = document.getElementById 'cropper-area'

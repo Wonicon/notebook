@@ -17,12 +17,12 @@
 p = @subject.description
 
 .ui.top.attached.tabular.menu
+  a.item[data-tab="journals" class="#{'active' if @current_subject_page_tab == 'journals'}"]
+    | Journals
   a.item[data-tab="posts" class="#{'active' if @current_subject_page_tab == 'posts'}"]
     | Posts
   a.item[data-tab="tasks" class="#{'active' if @current_subject_page_tab == 'tasks'}"]
     | Tasks
-  a.item[data-tab="journals" class="#{'active' if @current_subject_page_tab == 'journals'}"]
-    | Journals
 
 .ui.bottom.attached.tab.segment[data-tab="posts" class="#{'active' if @current_subject_page_tab == 'posts'}"]
   = link_to 'new post', new_subject_post_path(@subject)
