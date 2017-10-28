@@ -19,7 +19,14 @@ class JournalsController < ApplicationController
 
   def create
     subject = Subject.find(params[:subject_id])
-    journal = subject.journals.new(journal_params)
+    date = params[:journal][:date]
+    existed_journal = subject.journals.find_by(date: date)
+    if existed_journal
+      existed_journal.content = existed_journal.content + "\n" + params[:journal][:content]
+      journal = existed_journal
+    else
+      journal = subject.journals.new(journal_params)
+    end
     session[:current_subject_page_tab] = 'journals'
     if journal.save
       redirect_back fallback_location: root_path
