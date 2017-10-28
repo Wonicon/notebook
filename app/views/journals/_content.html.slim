@@ -1,0 +1,4 @@
+.text[id="journal-#{journal.id}"] = markdown journal.content
+.hover-mask.actions
+  = link_to 'edit', "javascript:edit(#{journal.id})", class: 'reply'
+  = link_to 'delete', journal_path(journal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'reply'

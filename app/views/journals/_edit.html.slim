@@ -1,0 +1,5 @@
+= form_with(model: @journal, class: 'ui form', id: "journal-edit-#{@journal.id}") do |form|
+  .field
+    = form.text_area :content
+  .right-aligned
+    = form.submit nil, class: 'ui button inverted blue'

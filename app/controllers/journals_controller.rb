@@ -28,6 +28,17 @@ class JournalsController < ApplicationController
     end
   end
 
+  def edit
+    @journal = Journal.find(params[:id])
+    render partial: 'edit', layout: false
+  end
+
+  def update
+    @journal = Journal.find(params[:id])
+    @journal.update(params.require(:journal).permit(:content))
+    render plain: helpers.markdown(@journal.content)
+  end
+
   def destroy
     journal = Journal.find(params[:id])
     journal.destroy

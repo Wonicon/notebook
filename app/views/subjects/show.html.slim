@@ -38,4 +38,4 @@ p = @subject.description
   #new_journal
     = render 'journals/form'
   .ui.comments#subject_show_comments
-    = render partial: 'journals/journal', collection: @subject.journals
+    = render partial: 'journals/journal', collection: @subject.journals.sort_by{|j| j.date}.reverse

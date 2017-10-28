@@ -2,6 +2,4 @@
   .content
     .metadata#date-leading
       span.date = journal.date
-    .text = journal.content
-    .actions.hover-mask
-      = link_to 'delete', journal_path(journal), method: :delete, class: 'replay'
+    = render partial: 'journals/content', locals: { journal: journal }
