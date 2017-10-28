@@ -10,5 +10,5 @@
           .content
             a.author[href="#{subject_path(j.subject)}"] = j.subject.name
             .text = markdown j.content
-            #hover-mask.actions
+            .hover-mask.actions
               = link_to 'delete', journal_path(j), method: :delete, class: 'reply'
