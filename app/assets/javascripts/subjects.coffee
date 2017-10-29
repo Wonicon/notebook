@@ -10,11 +10,12 @@ document.addEventListener 'turbolinks:load', ->
     cover.addEventListener 'change', updatePreview
     set_value = ->
       c = cropper.getCropBoxData()
-      console.log(c)
-      document.getElementById('crop_width').value = c.width
-      document.getElementById('crop_height').value = c.height
-      document.getElementById('crop_left').value = c.left
-      document.getElementById('crop_top').value = c.top
+      canvas = cropper.getCanvasData()
+      image = cropper.getImageData()
+      document.getElementById('crop_width').value  = c.width  * image.naturalWidth  / canvas.width
+      document.getElementById('crop_height').value = c.height * image.naturalHeight / canvas.height
+      document.getElementById('crop_left').value   = c.left   * image.naturalWidth  / canvas.width
+      document.getElementById('crop_top').value    = c.top    * image.naturalHeight / canvas.height
     cropper_area = document.getElementById 'cropper-area'
     cropper_area.addEventListener 'ready', set_value
     cropper_area.addEventListener 'cropend', set_value
