@@ -12,6 +12,7 @@
  *
  *= require cropper.min
  *= require semantic.min
+ *= require simplemde.min
  *= require_tree .
  *= require_self
  */
