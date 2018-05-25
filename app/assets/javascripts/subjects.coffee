@@ -23,20 +23,22 @@ document.addEventListener 'turbolinks:load', ->
     # Category dropdown selection initialization require by Semantic UI
     $('.ui.dropdown').dropdown()
 
-  
-  ###############################
-  # Init Simple Markdown Editor
-  # #############################
+  if document.URL.match '.*/subjects/.*'
+    # Init tabs in show page
+    $('.tabular.menu .item').tab({})
+    init_markdown_editor()
+
+  if document.URL.match '.*/posts/.*/edit'
+    init_markdown_editor()
+
+
+init_markdown_editor = ->
   simplemde = new SimpleMDE
-  # Avoid duplicated object while navigating with turbolink
   document.addEventListener("turbolinks:before-cache", ->
     simplemde.toTextArea()
     simplemde = null
   )
 
-  if document.URL.match '.*/subjects/.*'
-    # Init tabs in show page
-    $('.tabular.menu .item').tab({})
 
 updatePreview = ->
   cropper_area = document.getElementById 'cropper-area'
